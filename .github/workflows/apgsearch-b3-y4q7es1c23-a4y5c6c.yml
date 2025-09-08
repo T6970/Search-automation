@@ -1,4 +1,4 @@
-name: apgsearch-b2-a6k8s23ae45i68
+name: apgsearch-b3-y4q7es1c23-a4y5c6c
 
 on:
   schedule:
@@ -36,7 +36,7 @@ jobs:
       - name: Compile apgmera
         run: |
           cd apgmera
-          ./recompile.sh --rule b2-a6k8s23ae45i68
+          ./recompile.sh --rule b3-y4q7es1c23-a4y5c6c
 
       - name: Run apgluxe
         run: |
