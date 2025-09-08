@@ -1,4 +1,4 @@
-name: apgsearch-b3-y4q7es1c23-a4y5c6c
+name: apgsearch-oca
 
 on:
   schedule:
@@ -30,16 +30,17 @@ jobs:
       - name: Clone apgmera (if not cached)
         run: |
           if [ ! -d "./apgmera/.git" ]; then
+            curl -sSL 'https://conwaylife.com/w/index.php?title=Rule:SparkCoil2&action=raw' -o ./sparkCoil2
             git clone https://gitlab.com/apgoucher/apgmera.git
           fi
 
       - name: Compile apgmera
         run: |
           cd apgmera
-          ./recompile.sh --rule b3-y4q7es1c23-a4y5c6c
+          ./recompile.sh --rule ./sparkCoil2
 
       - name: Run apgluxe
         run: |
           cd apgmera
-          ./apgluxe -n 1000000 -k b35y7es23
+          ./apgluxe -n 10000 -k b35y7es23
           
