@@ -4,6 +4,17 @@ on:
   schedule:
     - cron: "0 0 * * *" # Runs daily at midnight UTC
   workflow_dispatch: # Allow manual trigger
+    inputs:
+      rule:
+        description: 'Rulestring'
+        required: true
+      symmetry:
+        description: 'Symmetry of soup'
+        required: true
+        default: "C1"
+      soups:
+        description: 'Number of soups per haul'
+        required: true
 
 jobs:
   apgsearch:
@@ -30,17 +41,15 @@ jobs:
       - name: Clone apgmera (if not cached)
         run: |
           if [ ! -d "./apgmera/.git" ]; then
-            curl -sSL 'https://conwaylife.com/w/index.php?title=Rule:SparkCoil2&action=raw' -o ./sparkCoil2
             git clone https://gitlab.com/apgoucher/apgmera.git
           fi
 
       - name: Compile apgmera
         run: |
           cd apgmera
-          ./recompile.sh --rule ./sparkCoil2
+          ./recompile.sh --rule "${{ github.event.inputs.rule }}" --symmetries "${{ github.event.inputs.symmetry }}"
 
       - name: Run apgluxe
         run: |
           cd apgmera
-          ./apgluxe -n 10000 -k b35y7es23
-          
+          ./apgluxe -n ${{ github.event.inputs.soups }} -k b35y7es23
