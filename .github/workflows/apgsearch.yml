@@ -41,5 +41,4 @@ jobs:
       - name: Run apgluxe
         run: |
           cd apgmera
-          ./apgluxe -n 10000000 -k b35y7es23
-          
+          ./apgluxe -n 10000000 -k b35y7es23 -i 10
