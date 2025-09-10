@@ -1,4 +1,4 @@
-name: apgsearch-oca
+name: apgsearch but it's OCA
 
 on:
   workflow_dispatch: # Allow manual trigger
@@ -6,6 +6,7 @@ on:
       rule:
         description: 'Rulestring'
         required: true
+        default: "b3s23"
       symmetry:
         description: 'Symmetry of soup'
         required: true
@@ -13,6 +14,11 @@ on:
       soups:
         description: 'Number of soups per haul'
         required: true
+        default: "100000"
+      limit: 
+        description: 'Number of hauls to submit' 
+        required: true
+        default: "10"
 
 jobs:
   apgsearch:
@@ -50,4 +56,4 @@ jobs:
       - name: Run apgluxe
         run: |
           cd apgmera
-          ./apgluxe -n ${{ github.event.inputs.soups }} -k b35y7es23
+          ./apgluxe -n ${{ github.event.inputs.soups }} -k b35y7es23 -i ${{ github.event.inputs.limit }}
