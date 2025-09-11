@@ -1,8 +1,6 @@
 name: apgsearch
 
 on:
-  schedule:
-    - cron: "0 */2 * * *" # Runs every 2 hours
   workflow_dispatch: # Allow manual trigger
 
 jobs:
